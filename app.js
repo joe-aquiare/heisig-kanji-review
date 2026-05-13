@@ -315,13 +315,16 @@ function canvasPoint(event) {
 }
 
 function startDrawing(event) {
+  event.preventDefault();
   state.drawing = true;
   state.lastPoint = canvasPoint(event);
+  document.body.classList.add("is-drawing");
   els.canvas.setPointerCapture(event.pointerId);
 }
 
 function draw(event) {
   if (!state.drawing || !state.lastPoint) return;
+  event.preventDefault();
   const point = canvasPoint(event);
   state.strokes.push({ from: state.lastPoint, to: point });
   drawStrokeSegment(state.lastPoint, point);
@@ -343,9 +346,11 @@ function drawStrokeSegment(from, to) {
   canvasContext.restore();
 }
 
-function stopDrawing() {
+function stopDrawing(event) {
+  event?.preventDefault();
   state.drawing = false;
   state.lastPoint = null;
+  document.body.classList.remove("is-drawing");
 }
 
 function toggleScratchpad() {
@@ -444,11 +449,14 @@ function bindEvents() {
     showToast("Saved state reset.");
   });
 
-  els.canvas.addEventListener("pointerdown", startDrawing);
-  els.canvas.addEventListener("pointermove", draw);
-  els.canvas.addEventListener("pointerup", stopDrawing);
-  els.canvas.addEventListener("pointercancel", stopDrawing);
-  els.canvas.addEventListener("pointerleave", stopDrawing);
+  els.scratchpadWrap.addEventListener("selectstart", (event) => event.preventDefault());
+  els.scratchpadWrap.addEventListener("dragstart", (event) => event.preventDefault());
+  els.canvas.addEventListener("contextmenu", (event) => event.preventDefault());
+  els.canvas.addEventListener("pointerdown", startDrawing, { passive: false });
+  els.canvas.addEventListener("pointermove", draw, { passive: false });
+  els.canvas.addEventListener("pointerup", stopDrawing, { passive: false });
+  els.canvas.addEventListener("pointercancel", stopDrawing, { passive: false });
+  els.canvas.addEventListener("pointerleave", stopDrawing, { passive: false });
 
   window.addEventListener("keydown", (event) => {
     if (els.settingsDialog.open) return;

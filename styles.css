@@ -18,6 +18,10 @@
   box-sizing: border-box;
 }
 
+html {
+  overscroll-behavior: none;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -25,6 +29,14 @@ body {
     linear-gradient(90deg, rgba(47, 111, 94, 0.08), transparent 32%, rgba(166, 79, 49, 0.08)),
     var(--bg);
   color: var(--ink);
+}
+
+body.is-drawing,
+body.is-drawing * {
+  cursor: crosshair;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 button,
@@ -211,6 +223,9 @@ h2 {
 
 .scratchpad-section {
   min-width: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .wide-button {
@@ -219,6 +234,8 @@ h2 {
 
 .scratchpad-wrap {
   margin-top: 10px;
+  overscroll-behavior: contain;
+  touch-action: none;
 }
 
 .scratchpad-head {
@@ -241,6 +258,9 @@ canvas {
   background: #ffffff;
   cursor: crosshair;
   touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .settings-dialog {
