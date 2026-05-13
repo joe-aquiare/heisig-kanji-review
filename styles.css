@@ -1,0 +1,377 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f1e8;
+  --ink: #24211d;
+  --muted: #6f665d;
+  --line: #d9cec0;
+  --panel: #fffaf1;
+  --panel-strong: #ffffff;
+  --accent: #2f6f5e;
+  --accent-dark: #205446;
+  --answer: #2e7d4f;
+  --warn: #a64f31;
+  --shadow: 0 18px 50px rgba(49, 40, 28, 0.14);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(90deg, rgba(47, 111, 94, 0.08), transparent 32%, rgba(166, 79, 49, 0.08)),
+    var(--bg);
+  color: var(--ink);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-strong);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(47, 111, 94, 0.28);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--accent-dark);
+}
+
+.app-shell {
+  width: min(100%, 760px);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.review-panel {
+  min-height: calc(100vh - 48px);
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto auto;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 250, 241, 0.94);
+  box-shadow: var(--shadow);
+}
+
+.app-header,
+.dialog-head,
+.status-bar,
+.scratchpad-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.eyebrow {
+  margin: 0 0 3px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+h1,
+h2 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+}
+
+h2 {
+  font-size: 1.3rem;
+}
+
+.icon-button {
+  width: 42px;
+  padding: 0;
+  display: inline-grid;
+  place-items: center;
+  font-size: 1.35rem;
+}
+
+.toolbar,
+.nav-row,
+.dialog-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.status-bar {
+  min-height: 34px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.status-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  text-align: right;
+}
+
+.card-stage {
+  min-height: 310px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 18px;
+  border-block: 1px solid var(--line);
+  text-align: center;
+}
+
+.main-display,
+.secondary-display {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: min(5vw, 36px);
+  overflow-wrap: anywhere;
+}
+
+.keyword {
+  max-width: 100%;
+  font-size: clamp(2rem, 8vw, 4.3rem);
+  line-height: 1.08;
+  font-weight: 750;
+}
+
+.secondary-display .keyword {
+  font-size: clamp(1.2rem, 3.7vw, 1.75rem);
+  color: var(--muted);
+}
+
+.kanji-pair {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: min(6vw, 34px);
+  max-width: 100%;
+}
+
+.kanji {
+  font-size: clamp(5.8rem, 25vw, 10.6rem);
+  line-height: 0.95;
+  font-weight: 400;
+}
+
+.secondary-display .kanji {
+  font-size: clamp(1.8rem, 7vw, 2.7rem);
+}
+
+.kanji.sans {
+  font-family: "Yu Gothic", "Meiryo", "Noto Sans CJK JP", sans-serif;
+}
+
+.kanji.serif {
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif CJK JP", serif;
+}
+
+.answer {
+  color: var(--answer);
+}
+
+.scratchpad-section {
+  min-width: 0;
+}
+
+.wide-button {
+  width: 100%;
+}
+
+.scratchpad-wrap {
+  margin-top: 10px;
+}
+
+.scratchpad-head {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.scratchpad-head button {
+  min-height: 34px;
+  padding: 0 14px;
+}
+
+canvas {
+  width: 100%;
+  aspect-ratio: 43 / 27;
+  display: block;
+  border: 1px solid #b7aa9b;
+  border-radius: 6px;
+  background: #ffffff;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.settings-dialog {
+  width: min(calc(100vw - 32px), 520px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0;
+  background: var(--panel);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.settings-dialog::backdrop {
+  background: rgba(25, 22, 18, 0.42);
+}
+
+.settings-dialog form {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+}
+
+label span,
+legend {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 12px;
+  background: #ffffff;
+  color: var(--ink);
+}
+
+fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.segmented-control {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.segmented-control label {
+  min-width: 0;
+}
+
+.segmented-control input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.segmented-control span {
+  min-height: 42px;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 8px;
+  background: #ffffff;
+  color: var(--ink);
+  text-align: center;
+  font-size: 0.92rem;
+}
+
+.segmented-control input:checked + span {
+  border-color: var(--accent);
+  background: rgba(47, 111, 94, 0.12);
+  color: var(--accent-dark);
+}
+
+.form-error {
+  min-height: 20px;
+  margin: 0;
+  color: var(--warn);
+  font-size: 0.92rem;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%) translateY(16px);
+  max-width: min(92vw, 520px);
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #24211d;
+  color: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    padding: 0;
+  }
+
+  .review-panel {
+    min-height: 100vh;
+    border: 0;
+    border-radius: 0;
+    padding: 16px;
+  }
+
+  .toolbar,
+  .nav-row,
+  .dialog-actions,
+  .segmented-control {
+    grid-template-columns: 1fr;
+  }
+
+  .card-stage {
+    min-height: 280px;
+  }
+}

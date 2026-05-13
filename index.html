@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Remembering the Kanji Review</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="review-panel" aria-labelledby="app-title">
+        <header class="app-header">
+          <div>
+            <p class="eyebrow">Remembering the Kanji</p>
+            <h1 id="app-title">Heisig Review</h1>
+          </div>
+          <button class="icon-button" id="settings-button" type="button" aria-label="Study settings" title="Study settings">
+            <span aria-hidden="true">⚙</span>
+          </button>
+        </header>
+
+        <div class="toolbar" aria-label="Review controls">
+          <button id="new-session-button" type="button">New Session</button>
+          <button id="shuffle-button" type="button">Shuffle</button>
+        </div>
+
+        <div class="status-bar">
+          <span id="progress-label">0/0</span>
+          <span class="status-meta">
+            <span id="frame-label"></span>
+            <span id="jlpt-label"></span>
+          </span>
+        </div>
+
+        <section class="card-stage" aria-live="polite">
+          <div id="main-display" class="main-display"></div>
+          <div id="secondary-display" class="secondary-display"></div>
+        </section>
+
+        <div class="nav-row">
+          <button id="previous-button" type="button">Previous</button>
+          <button id="action-button" class="primary" type="button">Answer</button>
+        </div>
+
+        <section class="scratchpad-section" aria-label="Scratchpad">
+          <button id="scratchpad-toggle" class="wide-button" type="button" aria-expanded="false">Show Scratchpad</button>
+          <div id="scratchpad-wrap" class="scratchpad-wrap" hidden>
+            <div class="scratchpad-head">
+              <span>Scratchpad</span>
+              <button id="clear-scratchpad" type="button">Clear</button>
+            </div>
+            <canvas id="scratchpad" width="860" height="540"></canvas>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <dialog id="settings-dialog" class="settings-dialog">
+      <form id="settings-form" method="dialog">
+        <div class="dialog-head">
+          <h2>Study Settings</h2>
+          <button class="icon-button" id="close-settings" type="button" aria-label="Close settings" title="Close settings">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+
+        <label>
+          <span>Frame range</span>
+          <input id="range-input" name="range" type="text" inputmode="numeric" placeholder="100-1000" required>
+        </label>
+
+        <label>
+          <span>Reviews</span>
+          <input id="count-input" name="count" type="number" inputmode="numeric" min="1" placeholder="Blank for all">
+        </label>
+
+        <fieldset>
+          <legend>Direction</legend>
+          <div class="segmented-control">
+            <label>
+              <input type="radio" name="direction" value="Keyword → Kanji" checked>
+              <span>Keyword → Kanji</span>
+            </label>
+            <label>
+              <input type="radio" name="direction" value="Kanji → Keyword">
+              <span>Kanji → Keyword</span>
+            </label>
+            <label>
+              <input type="radio" name="direction" value="Random">
+              <span>Random</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <p id="settings-error" class="form-error" role="alert"></p>
+
+        <div class="dialog-actions">
+          <button id="reset-progress" type="button">Reset Saved State</button>
+          <button class="primary" type="submit">Start</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
